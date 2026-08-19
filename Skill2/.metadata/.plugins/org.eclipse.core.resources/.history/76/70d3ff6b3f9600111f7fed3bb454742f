@@ -1,0 +1,14 @@
+package soa.model;
+
+import jakarta.persistence.*;
+
+public class Product {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long product_id;
+	String product_name;
+	String category;
+	double price;
+	int stock;
+	
+}

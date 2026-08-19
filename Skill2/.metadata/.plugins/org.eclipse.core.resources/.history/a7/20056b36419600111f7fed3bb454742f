@@ -1,0 +1,35 @@
+package soa.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+import soa.ProductServiceApplication;
+import soa.model.Product;
+import soa.repo.ProductRepo;
+
+@Service
+public class ProductService {
+
+    private final ProductServiceApplication productServiceApplication;
+	ProductRepo PR;
+	
+	public ProductService(ProductRepo PR, ProductServiceApplication productServiceApplication) {
+		this.PR = PR;
+		this.productServiceApplication = productServiceApplication;
+	}
+	
+	public Object getAllProduct() {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			List<Product> products = PR.findAll();
+			response.put("products", products);
+		}
+		catch(Exception e) {
+			response.put("code", 500);
+            response.put("message", e.getMessage());
+		}
+		return response;
+	}
+}
